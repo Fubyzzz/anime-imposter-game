@@ -1,0 +1,19 @@
+{
+  "name": "anime-imposter-game",
+  "version": "1.0.0",
+"description": "Anime Guess The Imposter",
+"author": "Fabian",
+  "main": "main.js",
+ "scripts": {
+    "start": "node server.js",
+    "build": "electron-builder"
+},
+  "dependencies": {
+    "express": "^4.18.2",
+    "socket.io": "^4.7.5"
+  },
+  "devDependencies": {
+    "electron": "^42.4.1",
+    "electron-builder": "^26.15.3"
+  }
+}
