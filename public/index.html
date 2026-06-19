@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Anime Imposter</title>
+<style>
+body{font-family:Arial;background:#111;color:white;text-align:center}
+input,button{padding:12px;margin:5px;border-radius:8px}
+#card{font-size:25px;margin:25px;padding:25px;border:2px solid white}
+</style>
+</head>
+<body>
+<h1>Anime Guess The Imposter</h1>
+
+<input id="name" placeholder="Numele tau">
+<input id="room" placeholder="Camera (ex: 123)">
+<button onclick="join()">Intra</button>
+
+<h2>Jucatori</h2>
+<div id="players"></div>
+
+<button onclick="start()">Start joc</button>
+
+<div id="card">Asteapta rolul...</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+const socket=io();
+let camera="";
+
+function join(){
+ camera=document.getElementById("room").value;
+ socket.emit("join",{
+  name:document.getElementById("name").value,
+  room:camera
+ });
+}
+
+function start(){
+ socket.emit("start",camera);
+}
+
+socket.on("players",p=>{
+ document.getElementById("players").innerHTML=p.join("<br>");
+});
+
+socket.on("role",r=>{
+ document.getElementById("card").innerText=r.text;
+});
+</script>
+</body>
+</html>
